@@ -1,4 +1,5 @@
--e .
+-e git+https://github.com/muravjov/disvolvu.git#egg=disvolvu
+#-e .
 
 # очень круто:
 # - с-clone-ит репозиторий, так что при желании можно правку закоммиттить обратно
