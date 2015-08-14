@@ -1,3 +1,6 @@
+# :TRICKY: this link to disvolvu itself is to let install it
+# with just one pip command: pip install -r https://github.com/muravjov/disvolvu/raw/master/requirements.txt
+
 -e git+https://github.com/muravjov/disvolvu.git#egg=disvolvu
 #-e .
 
