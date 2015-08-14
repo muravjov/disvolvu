@@ -1,0 +1,9 @@
+# очень круто:
+# - с-clone-ит репозиторий, так что при желании можно правку закоммиттить обратно
+# - pip умудряется клонировать с подмодулями всеми, чего обычным с git clone не выходит (нужен флаг --recursive)
+-e git+https://github.com/muravjov/ansible.git@stable-1.9#egg=ansible
+
+git+https://github.com/muravjov/fablib.git
+
+-e git+https://github.com/kislyuk/argcomplete.git@v0.8.9#egg=argcomplete
+
