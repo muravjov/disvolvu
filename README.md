@@ -19,3 +19,8 @@ $ disvolvu
 usage: disvolvu [-h] [--print-order] [--all-targets] [--report-timings]
                 receipt.py TARGETS
 ```
+
+## FAQ
+
+:TODO: document
+no-global-site-packages.txt
