@@ -13,3 +13,4 @@ git+https://github.com/muravjov/fablib.git
 
 -e git+https://github.com/kislyuk/argcomplete.git@v0.8.9#egg=argcomplete
 
+docker-py

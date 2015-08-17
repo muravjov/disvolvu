@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from __future__ import print_function
+
 import disvolvu
 import ans_module
 import os
@@ -103,3 +105,25 @@ def pip_action(tgt_name, source, env_path, req_path=None, **kwargs):
     
     pip_action_sources(tgt_name, sources, env_path, req_path=req_path, **kwargs)
 
+#
+# docker_action()
+#
+
+sshpass_installed = False
+
+def docker_action(tgt_name, keyfile, image, **kwargs):
+    def on_action():
+        import setup_container
+        res = bool(setup_container.find_container(tgt_name, search_all=True))
+        
+        if not res:
+            setup_container.setup(tgt_name, keyfile, image, **kwargs)
+    
+    source = "dvsdk_sshpass"
+
+    global sshpass_installed
+    if not sshpass_installed:
+        apt_action(source, "sshpass")
+        sshpass_installed = True
+    disvolvu.append_edge(tgt_name, [source], action=on_action)
+    

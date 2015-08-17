@@ -129,7 +129,7 @@ def main():
                 time_list.append((name, time))
             else:
                 res = node.action()
-            if not res:
+            if res is False:
                 message("""Fullfilling target %(name)s failed.""" % locals())
                 raise StopExecution()
         
