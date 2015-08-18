@@ -70,7 +70,22 @@ def deploy_mysql_db(dbname, dump_fpath, username=None, password=None):
         if username:
             ans_action_check("mysql_user", with_sudo=True, name=username, password=password, priv="%(dbname)s.*:ALL" % locals(), state="present")
         
-        ans_action_check("mysql_db", name=dbname, state="import", target=dump_fpath)
+        def import_db(dump_fpath):
+            ans_action_check("mysql_db", name=dbname, state="import", target=dump_fpath)
+        
+        if dump_fpath.endswith(".gz"):
+            import o_p
+            import gzip
+            import contextlib
+            import shutil
+            
+            with contextlib.nested(gzip.open(dump_fpath), o_p.create_named_tmp_file(suffix="sql")) as (src_f, dst_f):
+                shutil.copyfileobj(src_f, dst_f)
+                dst_f.close()
+                
+                import_db(dst_f.name)
+        else:
+            import_db(dump_fpath)
 
 #
 # git_action()
