@@ -130,13 +130,13 @@ This command will deploy our service to the test Docker machine, which will be c
 `disvolvu` make use of Ansible modules for implementing the big part of its own API. Namely, the function `ans_module.run_api(module, **kwargs)` runs the corresponding Ansible module with arguments on the local machine. Examples:
 
 	ans_module.run_api("git", repo="https://github.com/ansible/ansible.git", dest="ansible")
-clones Ansible sources into the folder `ansible`, more about `git` module usage see at http://docs.ansible.com/ansible/git_module.html ;
+clones Ansible sources into the folder `ansible`, more about `git` module usage see at [git module](http://docs.ansible.com/ansible/git_module.html);
 
 	ans_module.run_api("docker", image="tutum/debian:wheezy")
-create and runs Docker machine from the image `tutum/debian:wheezy`, more about `docker` module usage see at http://docs.ansible.com/ansible/docker_module.html ;
+create and runs Docker machine from the image `tutum/debian:wheezy`, more about `docker` module usage see at [docker module](http://docs.ansible.com/ansible/docker_module.html);
 
 	ans_module.run_api("apt", with_sudo=True, name=["mysql-server"])
-installs MySQL server via apt, more about `apt` module usage see at http://docs.ansible.com/ansible/apt_module.html .
+installs MySQL server via apt, more about `apt` module usage see at [apt module](http://docs.ansible.com/ansible/apt_module.html).
 
 ## Autocomplete
 
