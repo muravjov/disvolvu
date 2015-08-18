@@ -46,7 +46,7 @@ dvsdk.apt_action("vu-php-dep", [
     "php5-mysqlnd",
 ])
 
-# 1) git clone the main source repository to the folder vortaro_updater
+# git clone the main source repository to the folder vortaro_updater
 dvsdk.git_action("vortaro_updater-git", "git@bitbucket.org:******.git", "vortaro_updater")
 
 def on_db_deploy():
