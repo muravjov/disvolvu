@@ -64,7 +64,11 @@ class StopExecution(Exception):
 def message(text):
     print("\n%(text)s" % locals())
 
+import sys
+
 def play_receipt(args):
+    fname = args.receipt
+    
     glbs = {
         # exec/execfile() не устанавливает __file__, поэтому делаем сами
         # :TRICKY: еще можно вытащить имя файла через inspect.getframeinfo(inspect.currentframe())[0] уже
@@ -72,7 +76,10 @@ def play_receipt(args):
         "__file__" : args.receipt
     }
     
-    execfile(args.receipt, glbs)
+    if fname == '-':
+        exec(sys.stdin, glbs)
+    else:
+        execfile(fname, glbs)
 
 import timeit
 def timer():
