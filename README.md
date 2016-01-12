@@ -147,7 +147,14 @@ For example, to turn autocomplete on you should have `disvolvu` in your PATH and
 
 ## FAQ
 
-    :TODO: document
+* docker-py: client and server don't have same version (client : N, server: M)") - If you have such a problem, you may either install a different version docker-py (more old one), or update Docker. For example, with Docker Server API 1.19 (`docker version`) works good docker-py=1.3.1:
+
+	pip install docker-py==1.3.1
+
+## TODO
+
+    Documentation:
+    
     Core API: disvolvu.append_edge(target, sources=None, action=None)
     no-global-site-packages.txt for apt to work
     API in dvsdk
