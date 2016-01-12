@@ -45,9 +45,13 @@ def run_module(hosts, module_name, args, **complex_args):
 import docker
 import update_ssh_config
 
+def create_dclient():
+    #return docker.Client()
+    return docker.AutoVersionClient()
+
 def find_container(cont_name, client=None, search_all=False):
     if not client:
-        client = docker.Client()
+        client = create_dclient()
         
     # all=True покажет и не работающие
     containers = client.containers(all=search_all)
@@ -82,10 +86,10 @@ def setup(cont_name, keyfile, image, need_install_python=False, **kwargs):
     }    
     # настраиваем docker без with_sudo=True
     res = ans_module.run_api("docker", name=cont_name, image=image,
-                             labels=labels, **kwargs)
+                             labels=labels, docker_api_version="auto", **kwargs)
     assert res
     
-    client = docker.Client()
+    client = create_dclient()
     cont = find_container(cont_name, client)
     assert cont
     ip_addr = update_ssh_config.get_ipaddr(cont, client)
