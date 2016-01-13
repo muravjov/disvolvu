@@ -99,6 +99,9 @@ def git_action(tgt_name, repo, dest, add_git_host_key=True, **kwargs):
         kwargs["accept_hostkey"] = True
     else:
         kwargs["ssh_opts"] = "-o StrictHostKeyChecking=no"
+        
+    if not("merge" in kwargs):
+        kwargs["merge"] = True
 
     ansible_action(tgt_name, None, "git", repo=repo, dest=dest, **kwargs)
 
