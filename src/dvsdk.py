@@ -53,6 +53,11 @@ def ans_action_check(module_name, **kwargs):
     res = ansible_action_impl(module_name, **kwargs)
     assert res, "failed ansible module: %(module_name)s, kwargs = %(kwargs)s" % locals()
 
+# если что-то пошло не так = установилось наполовину:
+# - drop database <dbname>
+# - drop user '<username>'@'localhost';
+# - поправить код, дамп и т.д.
+# - запустить снова
 def deploy_mysql_db(dbname, dump_fpath, username=None, password=None):
     # установка базы
     
@@ -71,7 +76,7 @@ def deploy_mysql_db(dbname, dump_fpath, username=None, password=None):
             ans_action_check("mysql_user", with_sudo=True, name=username, password=password, priv="%(dbname)s.*:ALL" % locals(), state="present")
         
         def import_db(dump_fpath):
-            ans_action_check("mysql_db", name=dbname, state="import", target=dump_fpath)
+            ans_action_check("mysql_db", with_sudo=True, name=dbname, state="import", target=dump_fpath)
         
         if dump_fpath.endswith(".gz"):
             import o_p
